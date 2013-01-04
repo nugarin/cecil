@@ -47,6 +47,11 @@ namespace Mono.Cecil.Cil {
 			this.instructions = body.Instructions;
 		}
 
+        //Create an operand without any type checks
+		public Instruction CreateUnsafe (OpCode opcode, object operand)
+		{
+			return Instruction.CreateUnsafe(opcode, operand);
+		}
 		public Instruction Create (OpCode opcode)
 		{
 			return Instruction.Create (opcode);

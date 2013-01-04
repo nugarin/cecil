@@ -189,10 +189,16 @@ namespace Mono.Cecil.Cil {
 				return;
 
 			var operand = instruction.operand;
-			if (operand == null)
-				throw new ArgumentException ();
+			if (operand == null && instruction.ResolveOperand != null)
+			{
+			    operand = instruction.ResolveOperand(instruction.OpCode, instruction.Previous, instruction.Next);
+			}
+		    if (operand == null)
+		    {
+		        throw new ArgumentException();
+		    }
 
-			switch (operand_type) {
+		    switch (operand_type) {
 			case OperandType.InlineSwitch: {
 				var targets = (Instruction []) operand;
 				WriteInt32 (targets.Length);

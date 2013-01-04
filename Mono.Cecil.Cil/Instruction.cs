@@ -42,6 +42,13 @@ namespace Mono.Cecil.Cil {
 
 		SequencePoint sequence_point;
 
+        //Functin for resolving an operand
+        // ret: operand, in current opcode, prev, next
+	    public Func<OpCode, Instruction, Instruction, object> ResolveOperand
+	    {
+	        get; set;
+	    }
+
 		public int Offset {
 			get { return offset; }
 			set { offset = value; }
@@ -162,6 +169,16 @@ namespace Mono.Cecil.Cil {
 		{
 			builder.Append ("IL_");
 			builder.Append (instruction.offset.ToString ("x4"));
+		}
+
+        /// <summary>
+        /// Create an operand without checks
+        /// </summary>
+        /// <param name="opcode"></param>
+        /// <returns></returns>
+		public static Instruction CreateUnsafe (OpCode opcode, object operand)
+		{
+			return new Instruction (opcode, operand);
 		}
 
 		public static Instruction Create (OpCode opcode)
