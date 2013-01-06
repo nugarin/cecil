@@ -191,7 +191,7 @@ namespace Mono.Cecil.Cil {
 			var operand = instruction.operand;
 			if (operand == null && instruction.ResolveOperand != null)
 			{
-			    operand = instruction.ResolveOperand(instruction.OpCode, instruction.Previous, instruction.Next);
+			    operand = instruction.ResolveOperand(instruction);
 			}
 		    if (operand == null)
 		    {

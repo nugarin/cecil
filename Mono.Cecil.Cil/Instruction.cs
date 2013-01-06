@@ -43,11 +43,12 @@ namespace Mono.Cecil.Cil {
 		SequencePoint sequence_point;
 
         //Functin for resolving an operand
-        // ret: operand, in current opcode, prev, next
-	    public Func<OpCode, Instruction, Instruction, object> ResolveOperand
+	    public Func<Instruction, object> ResolveOperand
 	    {
 	        get; set;
 	    }
+
+        public string Label { get; set; }
 
 		public int Offset {
 			get { return offset; }
