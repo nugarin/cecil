@@ -387,11 +387,18 @@ namespace Mono.Cecil.Cil {
 				return;
 
 			switch (instruction.opcode.OperandType) {
-			case OperandType.ShortInlineBrTarget:
-			case OperandType.InlineBrTarget:
-				CopyBranchStackSize (ref stack_sizes, (Instruction) instruction.operand, stack_size);
-				break;
-			case OperandType.InlineSwitch:
+                case OperandType.ShortInlineBrTarget:
+                case OperandType.InlineBrTarget:
+			        {
+                        if (instruction.ResolveOperand != null)
+                        {
+                            instruction.Operand = instruction.ResolveOperand(instruction);
+                        }
+
+			            CopyBranchStackSize(ref stack_sizes, (Instruction) instruction.operand, stack_size);
+			            break;
+			        }
+			    case OperandType.InlineSwitch:
 				var targets = (Instruction[]) instruction.operand;
 				for (int i = 0; i < targets.Length; i++)
 					CopyBranchStackSize (ref stack_sizes, targets [i], stack_size);
