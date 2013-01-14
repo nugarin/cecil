@@ -51,7 +51,10 @@ namespace Mono.Cecil.Cil {
         public string Label { get; set; }
 
 		public int Offset {
-			get { return offset; }
+			get
+			{
+			    return offset;
+			}
 			set { offset = value; }
 		}
 
