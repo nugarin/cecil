@@ -434,6 +434,10 @@ namespace Mono.Cecil.Cil {
 
 		static void ComputeStackDelta (Instruction instruction, ref int stack_size)
 		{
+            if (instruction.ResolveOperand != null)
+            {
+                instruction.Operand = instruction.ResolveOperand(instruction);
+            }
 			switch (instruction.opcode.FlowControl) {
 			case FlowControl.Call: {
 				var method = (IMethodSignature) instruction.operand;
