@@ -440,7 +440,7 @@ namespace Mono.Cecil.Cil {
 
                 if (instruction.Operand == null)
                 {
-                    throw new ApplicationException("Couldn't resolve instuction operand.");
+                    throw new ApplicationException("Couldn't resolve instruction operand.");
                 }
             }
 			switch (instruction.opcode.FlowControl) {
