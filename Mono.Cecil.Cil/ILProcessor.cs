@@ -52,6 +52,14 @@ namespace Mono.Cecil.Cil {
 		{
 			return Instruction.CreateUnsafe(opcode, operand);
 		}
+
+        public Instruction CreateUnsafe(OpCode opcode, object operand, Func<Instruction, object> resolveOperand )
+        {
+            var ins = Instruction.CreateUnsafe(opcode, operand);
+            ins.ResolveOperand = resolveOperand;
+            return ins;
+        }
+
 		public Instruction Create (OpCode opcode)
 		{
 			return Instruction.Create (opcode);
